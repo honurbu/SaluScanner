@@ -56,50 +56,48 @@ namespace SaluScanner.Service.Services
         }
         private IEnumerable<Claim> GetClaimsByClient(Client client)
         {
-            var clientClaimList = new List<Claim>
-            {
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Sub, client.Id)
-            };
+            var claims = new List<Claim>();
 
-            clientClaimList.AddRange(client.Audiences.Select(x => new Claim(JwtRegisteredClaimNames.Aud, x)));
+            claims.AddRange(client.Audiences.Select(x => new Claim(JwtRegisteredClaimNames.Aud, x)));
 
-            return clientClaimList;
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString());
+            new Claim(JwtRegisteredClaimNames.Sub, client.Id.ToString());
+
+            return claims;
         }
 
-        public TokenDto CreateTokenForUser(User user)
+        public TokenDto CreateTokenForUser(User userApp)
         {
+
             var accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOption.AccessTokenExpiration);
             var refreshTokenExpiration = DateTime.Now.AddMinutes(_tokenOption.RefreshTokenExpiration);
-
             var securityKey = SignService.GetSymmetricSecurityKey(_tokenOption.SecurityKey);
+
             SigningCredentials signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
 
-            JwtSecurityToken jwtSecurityToken = new JwtSecurityToken
-            (
+            JwtSecurityToken jwtSecurityToken = new JwtSecurityToken(
                 issuer: _tokenOption.Issuer,
                 expires: accessTokenExpiration,
-                // available until now
                 notBefore: DateTime.Now,
-                claims: GetClaimsByUser(user, _tokenOption.Audience),
+                claims: GetClaimsByUser(userApp, _tokenOption.Audience),
                 signingCredentials: signingCredentials
-            );
+                );
 
-            // Initializing and Serializing Token
-            var tokenHandler = new JwtSecurityTokenHandler();
+            var handler = new JwtSecurityTokenHandler();
 
-            var token = tokenHandler.WriteToken(jwtSecurityToken);
+            var token = handler.WriteToken(jwtSecurityToken);
 
             var tokenDto = new TokenDto
             {
                 AccessToken = token,
                 RefreshToken = CreateRefreshToken(),
-
                 AccessTokenExpiration = accessTokenExpiration,
-                RefreshTokenExpiration = refreshTokenExpiration
+                RefreshTokenExpiration = refreshTokenExpiration,
+
             };
 
             return tokenDto;
+
         }
         public NonUserTokenDto CreateTokenForNonUser(Client client)
         {

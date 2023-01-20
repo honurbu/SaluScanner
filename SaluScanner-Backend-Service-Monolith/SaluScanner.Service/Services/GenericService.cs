@@ -62,7 +62,7 @@ namespace SaluScanner.Service.Services
 
             if(entity == null)
             {
-                return Response<NoDataDto>.Fail("ID Not Found", 404);
+                return Response<NoDataDto>.Fail("ID Not Found", 404, true);
             }
 
             _genericRepository.Remove(entity);
@@ -78,7 +78,7 @@ namespace SaluScanner.Service.Services
 
             if (entity == null)
             {
-                return Response<NoDataDto>.Fail("Not Found", 404);
+                return Response<NoDataDto>.Fail("Not Found", 404, true);
             }
 
             _genericRepository.Update(entity);

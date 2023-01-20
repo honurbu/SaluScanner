@@ -45,12 +45,12 @@ namespace SaluScanner.Service.Services
             
             if(user == null)
             {
-                return Response<TokenDto>.Fail("Email or Password Wrong!",404);
+                return Response<TokenDto>.Fail("Email or Password Wrong!",404,true);
             }
 
             if (!(await _userManager.CheckPasswordAsync(user, loginDto.Password)))
             {
-                return Response<TokenDto>.Fail("Email or Password Wrong!", 404);
+                return Response<TokenDto>.Fail("Email or Password Wrong!", 404,true);
             }
 
             var token = _tokenService.CreateTokenForUser(user);
@@ -83,7 +83,7 @@ namespace SaluScanner.Service.Services
 
             if(client == null)
             {
-                return Response<NonUserTokenDto>.Fail("No such client found", 404);
+                return Response<NonUserTokenDto>.Fail("No such client found", 404,true);
             }
 
             var token = _tokenService.CreateTokenForNonUser(client);
@@ -97,7 +97,7 @@ namespace SaluScanner.Service.Services
         
             if(existRefreshToken == null)
             {
-                return Response<TokenDto>.Fail("Refresh token not found.", 404);
+                return Response<TokenDto>.Fail("Refresh token not found.", 404, true);
             }
 
             var user = await _userManager.FindByIdAsync(existRefreshToken.UserId);
@@ -105,7 +105,7 @@ namespace SaluScanner.Service.Services
             // not necessary but defensive
             if(user == null)
             {
-                return Response<TokenDto>.Fail("Refresh token or user not found.", 404);
+                return Response<TokenDto>.Fail("Refresh token or user not found.", 404, true);
             }
 
             var tokenDto = _tokenService.CreateTokenForUser(user);
@@ -124,12 +124,12 @@ namespace SaluScanner.Service.Services
 
             if(existRefreshToken == null)
             {
-                return Response<NoDataDto>.Fail("Refresh token not found.", 404);
+                return Response<NoDataDto>.Fail("Refresh token not found.", 404, true);
             }
 
             _userRefreshTokenRepository.Remove(existRefreshToken);
 
-            _unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync();
 
             return Response<NoDataDto>.Success(200);
         }

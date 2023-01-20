@@ -6,7 +6,7 @@ using SaluScanner.Core.Service;
 
 namespace SaluScanner.AuthAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class AuthController : CustomBaseController
     {
@@ -21,7 +21,6 @@ namespace SaluScanner.AuthAPI.Controllers
         public async Task<IActionResult> CreateTokenAsync(LoginDto loginDto)
         {
             var results = await _authenticationService.CreateTokenAsync(loginDto);
-
             return ActionResultInstance(results);
         }
 
@@ -34,17 +33,17 @@ namespace SaluScanner.AuthAPI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> CreateTokenByRefreshTokenAsync(string refreshToken)
+        public async Task<IActionResult> CreateTokenByRefreshTokenAsync(RefreshTokenDto refreshToken)
         {
-            var results = await _authenticationService.CreateTokenByRefreshTokenAsync(refreshToken);
+            var results = await _authenticationService.CreateTokenByRefreshTokenAsync(refreshToken.Token);
             return ActionResultInstance(results);
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> RevokeRefreshTokenAsync(string refreshToken)
+        public async Task<IActionResult> RevokeRefreshTokenAsync(RefreshTokenDto refreshToken)
         {
-            var results = await _authenticationService.RevokeRefreshTokenAsync(refreshToken);
+            var results = await _authenticationService.RevokeRefreshTokenAsync(refreshToken.Token);
             return ActionResultInstance(results);
         }
     }

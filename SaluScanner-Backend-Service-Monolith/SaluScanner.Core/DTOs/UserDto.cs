@@ -8,8 +8,10 @@ namespace SaluScanner.Core.DTOs
 {
     public class UserDto : IDto
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Email { get; set; }
         public string UserName { get; set; }
+        public bool IsDarkMode { get; set; }
+
     }
 }

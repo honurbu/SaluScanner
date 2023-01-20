@@ -34,7 +34,7 @@ namespace SaluScanner.Service.Services
             if(!result.Succeeded)
             {
                 var errors = result.Errors.Select(e => e.Description).ToList();
-                return Response<UserDto>.Fail(new ErrorDto(errors), 400);
+                return Response<UserDto>.Fail(new ErrorDto(errors,true), 400);
             }
 
             await _unitOfWork.CommitAsync();
@@ -48,7 +48,7 @@ namespace SaluScanner.Service.Services
 
             if(user == null)
             {
-                return Response<UserDto>.Fail("No such user found!", 400);
+                return Response<UserDto>.Fail("No such user found!", 400,true);
             }
 
             return Response<UserDto>.Success(ObjectMapper.Mapper.Map<UserDto>(user),200);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SaluScanner.Core.Entities;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SaluScanner.Repository.DbContexts
 {
-    public class SqlServerDbContext : IdentityDbContext
+    public class SqlServerDbContext : IdentityDbContext<User, IdentityRole, string>
     {
         public DbSet<User> Users { get; set; }
         public DbSet<UserRefreshToken> UserRefreshTokens { get; set; }
@@ -27,10 +28,10 @@ namespace SaluScanner.Repository.DbContexts
         {
         }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer("server=localhost; Database=SaluScannerFinalDb; Trusted_Connection=SSPI; Encrypt=false; TrustServerCertificate=true");
-        //}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("server=localhost; Database=SaluScannerFinalDb; Trusted_Connection=SSPI; Encrypt=false; TrustServerCertificate=true");
+        }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

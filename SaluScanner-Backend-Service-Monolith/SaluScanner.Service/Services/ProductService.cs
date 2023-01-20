@@ -31,7 +31,7 @@ namespace SaluScanner.Service.Services
 
             if(entity == null)
             {
-                return Response<ProductDto>.Fail("Barcode Not Found", 404);
+                return Response<ProductDto>.Fail("Barcode Not Found", 404, true);
             }
 
             var dto = ObjectMapper.Mapper.Map<ProductDto>(entity);

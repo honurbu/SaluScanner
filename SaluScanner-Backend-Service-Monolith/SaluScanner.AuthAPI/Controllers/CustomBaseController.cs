@@ -5,6 +5,7 @@ using SaluScanner.SharedLibrary.DTOs;
 namespace SaluScanner.AuthAPI.Controllers
 {
     [ApiController]
+
     public class CustomBaseController : ControllerBase
     {
         public IActionResult ActionResultInstance<T>(Response<T> response) where T : class

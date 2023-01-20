@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SaluScanner.Repository.DbContexts;
 
@@ -11,9 +12,11 @@ using SaluScanner.Repository.DbContexts;
 namespace SaluScanner.Repository.Migrations
 {
     [DbContext(typeof(SqlServerDbContext))]
-    partial class SqlServerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230118163817_deneme3")]
+    partial class deneme3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -200,12 +203,7 @@ namespace SaluScanner.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Allergens");
                 });
@@ -434,7 +432,7 @@ namespace SaluScanner.Repository.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<bool?>("IsDarkMode")
+                    b.Property<bool>("IsDarkMode")
                         .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
@@ -583,13 +581,6 @@ namespace SaluScanner.Repository.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SaluScanner.Core.Entities.Allergen", b =>
-                {
-                    b.HasOne("SaluScanner.Core.Entities.User", null)
-                        .WithMany("Allergies")
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("SaluScanner.Core.Entities.Content", b =>
                 {
                     b.HasOne("SaluScanner.Core.Entities.Allergen", "Allergen")
@@ -642,11 +633,6 @@ namespace SaluScanner.Repository.Migrations
             modelBuilder.Entity("SaluScanner.Core.Entities.Company", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("SaluScanner.Core.Entities.User", b =>
-                {
-                    b.Navigation("Allergies");
                 });
 #pragma warning restore 612, 618
         }

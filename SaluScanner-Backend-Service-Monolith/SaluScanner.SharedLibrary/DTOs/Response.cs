@@ -31,9 +31,9 @@ namespace SaluScanner.SharedLibrary.DTOs
             return new Response<T> { Errors = error, StatusCode = statusCode, IsSuccessful = false };
         }
 
-        public static Response<T> Fail(string errorMessage, int statusCode)
+        public static Response<T> Fail(string errorMessage, int statusCode, bool isShow)
         {
-            var errorDto = new ErrorDto(errorMessage);
+            var errorDto = new ErrorDto(errorMessage, isShow);
             return new Response<T> { Errors = errorDto, StatusCode = statusCode, IsSuccessful = false };
         }
     }
