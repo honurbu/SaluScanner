@@ -25,18 +25,18 @@ namespace SaluScanner.Service.Services
             _mapper = mapper;
         }
 
-        public async Task<Response<ProductDto>> GetProductByBarcodeAsync(string barcode)
+        public async Task<Response<Product>> GetProductByBarcodeAsync(string barcode)
         {
             var entity = await _repository.GetProductByBarcodeAsync(barcode);
 
-            if(entity == null)
+            if (entity == null)
             {
-                return Response<ProductDto>.Fail("Barcode Not Found", 404, true);
+                return Response<Product>.Fail("Barcode Not Found", 404, true);
             }
 
-            var dto = ObjectMapper.Mapper.Map<ProductDto>(entity);
+            var dto = ObjectMapper.Mapper.Map<Product>(entity);
 
-            return Response<ProductDto>.Success(dto, 200);
+            return Response<Product>.Success(dto, 200);
         }
     }
 }

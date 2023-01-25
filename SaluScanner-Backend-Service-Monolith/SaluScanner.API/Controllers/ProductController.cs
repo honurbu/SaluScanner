@@ -10,7 +10,7 @@ namespace SaluScanner.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class ProductController : CustomBaseController
     {
         private readonly IProductService _service;
 
@@ -23,28 +23,17 @@ namespace SaluScanner.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var products = await _service.GetAllAsync();
-
-            return Ok(products);
+            return ActionResultInstance(await _service.GetAllAsync());
         }
 
-         /*
+         
          [HttpGet("{barcode}")]
          public async Task<IActionResult> GetByBarcode(String barcode)
          {
-             var product = await _service.GetProductByBarcodeAsync(barcode);
-
-             return Ok(product);
+            return ActionResultInstance(await _service.GetProductByBarcodeAsync(barcode));
          }
-         */
 
 
-        //[HttpGet("{barcode}")]
-        //public async Task<IActionResult> GetByCertificateProduct(String barcode)
-        //{
-        //    var certificateProducts = await _service.GetCertificateByProductWithBarcodeAsync(barcode);
-        //    return Ok(certificateProducts);
-        //}
 
 
         [HttpPost]

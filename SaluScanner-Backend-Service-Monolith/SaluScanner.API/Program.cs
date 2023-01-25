@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using SaluScanner.Core.Repositories;
 using SaluScanner.Core.Services;
 using SaluScanner.Core.UnitOfWorks;
@@ -7,11 +8,15 @@ using SaluScanner.Repository.Repositories;
 using SaluScanner.Repository.UnitOfWorks;
 using SaluScanner.Service.Mapping;
 using SaluScanner.Service.Services;
+using SaluScanner.SharedLibrary.Extensions;
+using SaluScanner.SharedLibrary.Token;
 using System.Reflection;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+ConfigurationManager configuration = builder.Configuration;
+IWebHostEnvironment environment = builder.Environment;
 // Add services to the container.
 
 // Modified with AddJsonOptions to avoiding Cycle Reference Error!
@@ -27,10 +32,12 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // Repository Layer Dependency Injection
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped(typeof(IProductRepository), typeof(ProductRepository));
+builder.Services.AddScoped(typeof(IUserAllergenRepository), typeof(UserAllergenRepository));
 
 // Service Layer Dependency Injection
 //builder.Services.AddScoped(typeof(IGenericService<TEntity, TDto>), typeof(GenericService<>));
 builder.Services.AddScoped(typeof(IProductService), typeof(ProductService));
+builder.Services.AddScoped(typeof(IUserAllergenService), typeof(UserAllergenService));
 
 //AutoMapper
 builder.Services.AddAutoMapper(typeof(MapProfile));
@@ -46,8 +53,13 @@ builder.Services.AddDbContext<SqlServerDbContext>(x =>
         option.MigrationsAssembly(Assembly.GetAssembly(typeof(SqlServerDbContext)).GetName().Name);
     });
 });
+builder.Services.Configure<CustomTokenOption>(configuration.GetSection("TokenOption"));
+var tokenOptions = configuration.GetSection("TokenOption").Get<CustomTokenOption>();
 
+builder.Services.AddCustomTokenAuth(tokenOptions);
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -1,4 +1,5 @@
-﻿using SaluScanner.Core.Entities;
+﻿using SaluScanner.Core.DTOs;
+using SaluScanner.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

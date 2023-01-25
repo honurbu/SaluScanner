@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SaluScanner.Core.DTOs;
 using Azure.Core;
+using SaluScanner.SharedLibrary.Services;
 
 namespace SaluScanner.Service.Services
 {

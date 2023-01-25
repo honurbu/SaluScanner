@@ -12,5 +12,6 @@ namespace SaluScanner.Core.Entities
         public string ProductName { get; set; }
         public string Brand { get; set; }
         public string ProductOrigin { get; set; }
+        public string? Image { get; set; }
     }
 }

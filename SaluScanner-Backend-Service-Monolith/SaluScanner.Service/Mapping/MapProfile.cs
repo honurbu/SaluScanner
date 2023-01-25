@@ -15,8 +15,9 @@ namespace SaluScanner.Service.Mapping
         {
             CreateMap<Product,ProductDto>().ReverseMap();
             CreateMap<Certificate,CertificateDto>().ReverseMap();
-            CreateMap<Product,ProductWithCertificateDto>();
-            CreateMap<ProductWithCertificateDto, Product>();
+            CreateMap<User,UserDto>().ReverseMap();
+            CreateMap<User,UserAllergenDto>().ReverseMap();
+            CreateMap<Allergen,AllergenUserDto>().ReverseMap();
 
             CreateMap<UserDto, User>().ReverseMap();
 
