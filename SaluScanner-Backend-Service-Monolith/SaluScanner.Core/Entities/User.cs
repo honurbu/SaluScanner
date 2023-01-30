@@ -13,6 +13,8 @@ namespace SaluScanner.Core.Entities
 
         //Navigations & Relations
         public ICollection<Allergen> Allergies { get; set; }
-        public static object Claims { get; set; }
+        public float? Weight { get; set; }
+        public float? Height { get; set; }
+
     }
 }

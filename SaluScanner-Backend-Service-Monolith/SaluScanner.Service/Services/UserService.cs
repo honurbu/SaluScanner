@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using SaluScanner.AuthServer.Core.Service;
 using SaluScanner.Core.DTOs;
 using SaluScanner.Core.Entities;
@@ -19,6 +20,7 @@ namespace SaluScanner.Service.Services
             _userManager = userManager;
             _unitOfWork = unitOfWork;
         }
+
 
         public async Task<Response<UserDto>> CreateUserAsync(CreateUserDto createUserDto)
         {

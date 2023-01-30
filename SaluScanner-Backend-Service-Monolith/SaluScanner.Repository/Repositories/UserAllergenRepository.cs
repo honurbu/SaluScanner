@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SaluScanner.Core.Entities;
 using SaluScanner.Core.Repositories;
@@ -20,6 +22,7 @@ namespace SaluScanner.Repository.Repositories
         public async Task<User> GetAllergenByUser()
         {
 
+
             var userAllergy = dbContext.Users
                 .Include(x => x.Allergies);
 
@@ -29,5 +32,4 @@ namespace SaluScanner.Repository.Repositories
         }
     }
 }
-
 

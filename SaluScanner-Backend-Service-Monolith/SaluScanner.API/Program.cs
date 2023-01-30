@@ -47,12 +47,26 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<SqlServerDbContext>(x =>
 {
-    x.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnectionString"), option =>
+    x.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerDbContext"), option =>
     {
         // Get me Assembly (App) that has SqlServerDbContext in it.
         option.MigrationsAssembly(Assembly.GetAssembly(typeof(SqlServerDbContext)).GetName().Name);
     });
 });
+
+
+//builder.Services.AddDbContext<SqlServerDbContext>(options =>
+//{
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerDbContext"), sqlOptions =>
+//    {
+//        sqlOptions.MigrationsAssembly("SaluScanner.Repository");
+//    });
+//    options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+
+//});
+
+
+
 builder.Services.Configure<CustomTokenOption>(configuration.GetSection("TokenOption"));
 var tokenOptions = configuration.GetSection("TokenOption").Get<CustomTokenOption>();
 
