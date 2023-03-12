@@ -21,6 +21,8 @@ namespace SaluScanner.Service.Mapping
 
             CreateMap<UserDto, User>().ReverseMap();
 
+
+            CreateMap<Company,CompanyDto>().ReverseMap();
         }
     }
 }

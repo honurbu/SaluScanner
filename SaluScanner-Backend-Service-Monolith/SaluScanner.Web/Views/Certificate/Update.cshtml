@@ -1,0 +1,21 @@
+﻿@model SaluScanner.Core.Entities.Certificate
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Update", "Certificate", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.CertificateName)
+        @Html.TextBoxFor(m => m.CertificateName, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Description)
+        @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px">
+        <button class="btn btn-warning">Sertifika Güncelle</button>
+    </div>
+}
+

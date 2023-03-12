@@ -1,0 +1,20 @@
+﻿@using SaluScanner.Core.Entities
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form class="form-group">
+    <div>
+        <label>Alerji Adı</label>
+        <input type="text" class="form-control" name="AllergenName" />
+    </div>
+    <div>
+        <label>Alerji Açıklaması</label>
+        <input type="text" class="form-control" name="AllergenDescription" />
+    </div>
+    <div style="margin-top:15px">
+        <button class="btn btn-danger">Alerji Ekle</button>
+    </div>
+</form>
+

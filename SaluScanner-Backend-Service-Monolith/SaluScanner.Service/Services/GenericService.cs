@@ -45,6 +45,7 @@ namespace SaluScanner.Service.Services
             var dtos = ObjectMapper.Mapper.Map<List<TDto>>(await _genericRepository.GetAll().ToListAsync()); 
 
             return Response<IEnumerable<TDto>>.Success(dtos, 200);
+
         }
 
         public async Task<Response<TDto>> GetByIdAsync(int id)

@@ -1,0 +1,21 @@
+﻿@model SaluScanner.Core.Entities.Allergen
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Update", "Allergen", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.AllergenName)
+        @Html.TextBoxFor(m => m.AllergenName, new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(m => m.AllergenDescription)
+        @Html.TextBoxFor(m => m.AllergenDescription, new { @class = "form-control" })
+
+    </div>
+    <div style="margin-top:15px">
+        <button class="btn btn-warning">Alerji Güncelle</button>
+    </div>
+}
+

@@ -15,6 +15,8 @@ namespace SaluScanner.Core.Repositories
         // productRepository.Where(x => x.id > 5).OrdeyBy(..) = IQueryable, no SQL query yet.
         // * productRepository.Where(x => x.id > 5).ToList() = List, SQL has commited.
         IQueryable<TEntity> GetAll();
+        Task<IEnumerable<TEntity>> GetAllAsync();
+
         IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> expression);
         Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression);
         Task AddAsync(TEntity entity);

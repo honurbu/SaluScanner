@@ -1,0 +1,20 @@
+﻿@using SaluScanner.Core.Entities
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form class="form-group">
+    <div>
+        <label>Sertifika Adı</label>
+        <input type="text" class="form-control" name="CertificateName" />
+    </div>
+    <div>
+        <label>Sertifika Açıklaması</label>
+        <input type="text" class="form-control" name="Description" />
+    </div>
+    <div style="margin-top:15px">
+        <button class="btn btn-danger">Sertifika Ekle</button>
+    </div>
+</form>
+

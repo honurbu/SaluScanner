@@ -19,7 +19,7 @@
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
-        public int NutritionId { get; set; }
+        public int NutritionId { get; set; } 
         public Nutrition Nutrition { get; set; }
 
         public int ProductDetailId { get; set; }

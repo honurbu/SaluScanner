@@ -14,6 +14,7 @@ namespace SaluScanner.Core.Services
         Task<Response<TDto>> GetByIdAsync(int id);
         // this is business layer so there is no need for IQueryable anymore after this layer.
         Task<Response<IEnumerable<TDto>>> GetAllAsync();
+
         Task<Response<TDto>> AddAsync(TDto entity);
         Task<Response<NoDataDto>> RemoveById(int id);
         Task<Response<NoDataDto>> Update(TDto entity);

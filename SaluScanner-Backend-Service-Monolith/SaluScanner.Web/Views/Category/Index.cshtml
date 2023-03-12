@@ -1,0 +1,26 @@
+﻿@using SaluScanner.Core.Entities
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>KATEGORİ ADI</th>
+        <th>GÜNCELLE</th>
+        <th>SİL</th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@item.CategoryName</th>
+                <td><a class="btn btn-warning" asp-controller="Category" asp-action="Update" asp-route-id="@item.Id">GÜNCELLE</a></td>
+                <td><a class="btn btn-danger" asp-controller="Category" asp-action="Remove" asp-route-id="@item.Id">SİL</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/Category/Add/" class="btn btn-primary">YENİ KATEGORİ EKLE</a>
+

@@ -1,0 +1,37 @@
+﻿@using SaluScanner.Core.Entities
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<table class="table table-bordered">
+    <tr>
+        <th>ŞİRKET ADI</th>
+        <th>ŞİRKET HAKKINDA</th>
+        <th>MAİL</th>
+        <th>İLETİŞİM</th>
+        <th>WEBSİTE</th>
+        <th>GÜNCELLE</th>
+        <th>SİL</th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@item.Name</th>
+                <th>@item.About</th>
+                <th>@item.Mail</th>
+                <th>@item.ContactNumber</th>
+                <th>@item.Website999</th>
+                <td><a class="btn btn-warning" asp-controller="Company" asp-action="Update" asp-route-id="@item.Id">GÜNCELLE</a></td>
+                <td><a class="btn btn-danger" asp-controller="Company" asp-action="Remove" asp-route-id="@item.Id">SİL</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/Company/Add/" class="btn btn-primary">YENİ ŞİRKET EKLE</a>
+

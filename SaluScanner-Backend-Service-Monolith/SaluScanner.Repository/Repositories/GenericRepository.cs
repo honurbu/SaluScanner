@@ -40,13 +40,18 @@ namespace SaluScanner.Repository.Repositories
 
         public IQueryable<TEntity> GetAll()
         {
-            // take data but no track them. Like pass-by-value injecting
-            //      Example
-            var products = dbContext.Products.Include(p => p.Contents).Include(p => p.Nutrition).AsQueryable();
-            var contents = dbContext.Contents.Include(c => c.Allergen);
-            return (IQueryable<TEntity>)products;
-            //      Example
-            //return dbSet.AsNoTracking().AsQueryable();
+            //// take data but no track them. Like pass-by-value injecting
+            ////      Example
+            //var products = dbContext.Products.Include(p => p.Contents).Include(p => p.Nutrition).AsQueryable();
+            //var contents = dbContext.Contents.Include(c => c.Allergen);
+            //return (IQueryable<TEntity>)products;
+            ////      Example
+            return dbSet.AsNoTracking().AsQueryable();
+        }
+
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            return await dbSet.ToListAsync();
         }
 
         public async Task<TEntity> GetByIdAsync(int id)

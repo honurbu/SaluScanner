@@ -12,7 +12,7 @@ using SaluScanner.Repository.DbContexts;
 using SaluScanner.Repository.Repositories;
 using SaluScanner.Repository.UnitOfWorks;
 using SaluScanner.Service.Services;
-using SaluScanner.SharedLibrary.Services;
+//using SaluScanner.SharedLibrary.Services;
 using SaluScanner.SharedLibrary.Token;
 using System.Configuration;
 using ConfigurationManager = Microsoft.Extensions.Configuration.ConfigurationManager;

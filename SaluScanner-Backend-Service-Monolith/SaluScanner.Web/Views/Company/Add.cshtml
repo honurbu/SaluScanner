@@ -1,0 +1,36 @@
+﻿@using SaluScanner.Core.Entities
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<form class="form-group">
+    <div>
+        <label>Şirket Adı</label>
+        <input type="text" class="form-control" name="Name" />
+    </div>
+    <div>
+        <label>Şirket Hakkında</label>
+        <input type="text" class="form-control" name="About" />
+    </div>
+    <div>
+        <label>Şirket Mail</label>
+        <input type="email" class="form-control" name="Mail" />
+    </div>
+    <div>
+        <label>Şirket İletişim</label>
+        <input type="number" class="form-control" name="ContactNumber" />
+    </div>
+    <div>
+        <label>Şirket Website</label>
+        <input type="url" class="form-control" name="Website999" />
+    </div>
+
+    <div style="margin-top:15px">
+        <button class="btn btn-danger">Şirket Ekle</button>
+    </div>
+</form>
+
+

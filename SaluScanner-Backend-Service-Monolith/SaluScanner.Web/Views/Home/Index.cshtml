@@ -1,0 +1,37 @@
+﻿@using SaluScanner.Core.Entities
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@*<table class="table table-bordered">
+    <tr>
+        <th>BARKOD NUMARASI</th>
+        <th>ÜRÜN ID</th>
+        <th>ÜRÜN ADI</th>
+        <th>ÜRÜN KATEGORİ</th>
+        <th>ÜRÜN SERTİFİKA</th>
+        <th>ŞİRKET</th>
+        <th>ÜRÜN İÇERİĞİ</th>
+        <th>SİL</th>
+        <th>GÜNCELLE</th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Barcode</td>
+                <td>@item.Id</td>
+                <td>@item.ProductDetail.ProductName</td>
+                <td>@item.Category.CategoryName</td>
+                <td>@item.Certificate.CertificateName</td>
+                <td>@item.Company.Name</td>
+                <td>@item.Nutrition</td>
+                <td><a class="btn btn-warning" asp-controller="Products" asp-action="Update" asp-route-id="@item.Id">GÜNCELLE</a></td>
+                <td><a class="btn btn-danger" asp-controller="Products" asp-action="Remove" asp-route-id="@item.Id">SİL</a></td>
+            </tr>
+        }
+    </tbody>
+</table>*@
+
+<a href="/Product/ProductAdd/" class="btn btn-primary">YENİ ÜRÜN EKLE</a>
+

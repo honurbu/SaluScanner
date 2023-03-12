@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SaluScanner.API", "SaluScan
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SaluScanner.Service", "SaluScanner.Service\SaluScanner.Service.csproj", "{B1172C6C-6826-4006-A076-04664764AF4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaluScanner.SharedLibrary", "SaluScanner.SharedLibrary\SaluScanner.SharedLibrary.csproj", "{AB062074-7EC7-4E2A-88FD-EF8D5893B5F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SaluScanner.SharedLibrary", "SaluScanner.SharedLibrary\SaluScanner.SharedLibrary.csproj", "{AB062074-7EC7-4E2A-88FD-EF8D5893B5F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaluScanner.AuthAPI", "SaluScanner.AuthAPI\SaluScanner.AuthAPI.csproj", "{700CA1D0-44C9-461B-9468-D92DD2A1CBC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SaluScanner.AuthAPI", "SaluScanner.AuthAPI\SaluScanner.AuthAPI.csproj", "{700CA1D0-44C9-461B-9468-D92DD2A1CBC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaluScanner.Web", "SaluScanner.Web\SaluScanner.Web.csproj", "{D98F47BA-14D4-4E5B-BDA7-54C9E8BFF8C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{700CA1D0-44C9-461B-9468-D92DD2A1CBC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{700CA1D0-44C9-461B-9468-D92DD2A1CBC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{700CA1D0-44C9-461B-9468-D92DD2A1CBC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D98F47BA-14D4-4E5B-BDA7-54C9E8BFF8C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D98F47BA-14D4-4E5B-BDA7-54C9E8BFF8C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D98F47BA-14D4-4E5B-BDA7-54C9E8BFF8C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D98F47BA-14D4-4E5B-BDA7-54C9E8BFF8C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

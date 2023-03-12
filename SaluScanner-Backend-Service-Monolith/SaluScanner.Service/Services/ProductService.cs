@@ -19,6 +19,8 @@ namespace SaluScanner.Service.Services
         protected readonly IProductRepository _repository;
         private readonly IMapper _mapper;
 
+
+
         public ProductService(IGenericRepository<Product> _genericRepository, IUnitOfWork _unitOfWork, IProductRepository _productRepository, IMapper mapper) : base(_genericRepository, _unitOfWork)
         {
             this._repository = _productRepository;
