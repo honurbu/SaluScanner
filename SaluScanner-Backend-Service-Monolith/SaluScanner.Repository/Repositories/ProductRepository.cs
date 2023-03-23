@@ -22,7 +22,8 @@ namespace SaluScanner.Repository.Repositories
                 .Include(p => p.ProductDetail)
                 .Include(p => p.Company)
                 .Include(p => p.Category)
-                .Include(p => p.Contents); 
+                .Include(p => p.Contents).ThenInclude(p=>p.Allergen); 
+                
 
            // Console.WriteLine("--------------Certificate Count: "+filteredProduct.First().Certificates.Count);
 

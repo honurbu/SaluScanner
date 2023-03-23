@@ -10,5 +10,6 @@ namespace SaluScanner.Core.Repositories
     public interface IUserAllergenRepository : IGenericRepository<User>
     {
         Task<User> GetAllergenByUser();
+        
     }
 }

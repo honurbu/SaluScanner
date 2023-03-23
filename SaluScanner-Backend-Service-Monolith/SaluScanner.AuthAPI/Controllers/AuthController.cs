@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SaluScanner.Core.DTOs;
@@ -6,7 +7,7 @@ using SaluScanner.Core.Service;
 
 namespace SaluScanner.AuthAPI.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("[controller]/[action]")]
     [ApiController]
     public class AuthController : CustomBaseController
     {

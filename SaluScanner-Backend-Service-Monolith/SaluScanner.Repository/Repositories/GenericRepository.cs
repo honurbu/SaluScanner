@@ -28,14 +28,14 @@ namespace SaluScanner.Repository.Repositories
             await dbSet.AddAsync(entity);
         }
 
-        public Task AddRangeAsyn(IEnumerable<TEntity> entities)
+        public async Task AddRangeAsyn(IEnumerable<TEntity> entities)
         {
-            throw new NotImplementedException();
+            await dbSet.AddRangeAsync(entities);
         }
 
-        public Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression)
+        public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> expression)
         {
-            throw new NotImplementedException();
+            return await dbSet.AnyAsync(expression);
         }
 
         public IQueryable<TEntity> GetAll()

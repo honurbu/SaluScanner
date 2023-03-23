@@ -14,7 +14,6 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using SaluScanner.Core.DTOs;
 using Azure.Core;
 using SaluScanner.SharedLibrary.Services;
 
@@ -70,7 +69,7 @@ namespace SaluScanner.Service.Services
         public TokenDto CreateTokenForUser(User userApp)
         {
 
-            var accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOption.AccessTokenExpiration);
+            var accessTokenExpiration = DateTime.Now.AddMonths(_tokenOption.AccessTokenExpiration);
             var refreshTokenExpiration = DateTime.Now.AddMinutes(_tokenOption.RefreshTokenExpiration);
             var securityKey = SignService.GetSymmetricSecurityKey(_tokenOption.SecurityKey);
 

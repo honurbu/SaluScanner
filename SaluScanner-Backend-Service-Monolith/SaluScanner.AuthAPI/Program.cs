@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using SaluScanner.AuthServer.Core.Service;
 using SaluScanner.Core.Configuration;
 using SaluScanner.Core.Entities;
@@ -17,7 +18,11 @@ using SaluScanner.SharedLibrary.Token;
 using System.Configuration;
 using ConfigurationManager = Microsoft.Extensions.Configuration.ConfigurationManager;
 
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+
 
 ConfigurationManager configuration = builder.Configuration;
 IWebHostEnvironment environment= builder.Environment;
@@ -27,12 +32,17 @@ IWebHostEnvironment environment= builder.Environment;
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IAllergenService, AllergenService>();
+builder.Services.AddScoped<IAllergenRepository, AllergenRepository>();
 
 // DI Register of Generics (careful to multi type GenericService! It uses "," for each generic type)
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped(typeof(IGenericService<,>), typeof(GenericService<,>));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
+
 
 // DbContext
 builder.Services.AddDbContext<SqlServerDbContext>(options =>
@@ -42,16 +52,20 @@ builder.Services.AddDbContext<SqlServerDbContext>(options =>
         sqlOptions.MigrationsAssembly("SaluScanner.Repository");
     });
     options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-
 });
 
 
 // User Identity and User Roles(default by IdentityRole) but we could made a new one for Role like UserRole class etc.
+
+
 builder.Services.AddIdentity<User, IdentityRole>(Opt =>
 {
     Opt.User.RequireUniqueEmail = true;
     Opt.Password.RequireNonAlphanumeric = false;
 }).AddEntityFrameworkStores<SqlServerDbContext>().AddDefaultTokenProviders();
+
+
+
 
 builder.Services.Configure<CustomTokenOption>(configuration.GetSection("TokenOption"));
 builder.Services.Configure<List<Client>>(configuration.GetSection("Clients"));
@@ -101,6 +115,8 @@ app.UseSwaggerUI(c =>
 });
 
 app.UseHttpsRedirection();
+
+
 app.UseAuthentication();
 app.UseAuthorization();
 

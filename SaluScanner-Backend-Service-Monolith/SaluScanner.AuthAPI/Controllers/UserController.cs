@@ -6,7 +6,7 @@ using SaluScanner.Core.DTOs;
 
 namespace SaluScanner.AuthAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class UserController : CustomBaseController
     {
@@ -21,7 +21,14 @@ namespace SaluScanner.AuthAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateUser(CreateUserDto createUserDto)
         {
-            return ActionResultInstance(await _userService.CreateUserAsync(createUserDto));
+            try
+            {
+                return ActionResultInstance(await _userService.CreateUserAsync(createUserDto));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
 

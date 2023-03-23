@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace SaluScanner.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ProductController : CustomBaseController
     {
@@ -31,10 +31,9 @@ namespace SaluScanner.API.Controllers
          public async Task<IActionResult> GetByBarcode(String barcode)
          {
             return ActionResultInstance(await _service.GetProductByBarcodeAsync(barcode));
-         }
+         }  
 
-
-
+   
 
         [HttpPost]
         public async Task<IActionResult> Add(ProductDto productDto)

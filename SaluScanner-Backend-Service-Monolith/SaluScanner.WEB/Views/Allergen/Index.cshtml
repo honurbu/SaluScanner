@@ -1,0 +1,39 @@
+﻿@model List<SaluScanner.Core.Entities.Allergen> 
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<table class="table table-bordered">
+
+    <tr>
+        <th>alerjen id</th>
+        <th>alerjen ad</th>
+        <th>alerjen açıklaması</th>
+        <th>sil</th>
+        <th>güncelle</th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@item.Id</th>
+                <td>@item.AllergenName</td>
+                <td>@item.AllergenDescription</td>
+
+
+                @*<td> <a href="/kategori/sil/@ktgr.kategoriid" class="btn btn-danger" onclick="return confirm('silmek istediğinize emin misiniz ?')"> sil </a> </td>
+                <td> <a href="/kategori/kategorigetir/@ktgr.kategoriid" class="btn btn-success"> güncelle </a> </td>*@
+
+            </tr>
+
+        }
+
+
+    </tbody>
+
+</table>
+
+<p>merhaba</p>

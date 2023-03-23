@@ -13,5 +13,6 @@ namespace SaluScanner.Core.DTOs
         public ProductDetail ProductDetail { get; set; }
         public List<CertificateDto>? Certificates { get; set; }
 
+
     }
 }

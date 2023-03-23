@@ -215,6 +215,9 @@ namespace SaluScanner.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("AllergenSymptoms")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Allergens");
@@ -301,9 +304,6 @@ namespace SaluScanner.Repository.Migrations
 
                     b.Property<int?>("AllergenId")
                         .HasColumnType("int");
-
-                    b.Property<string>("ComponentDescription")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ComponentName")
                         .IsRequired()
