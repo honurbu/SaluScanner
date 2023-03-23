@@ -79,9 +79,21 @@ namespace SaluScanner.API.Controllers
             }
 
 
-
-
         }
+
+
+
+        //[Authorize]
+        //[HttpPost]
+        //public async Task<IActionResult> AddAllergen(int id)
+        //{
+        //    var userName = HttpContext.User.Identity.Name;
+        //    var userIdClaim = User.Claims.FirstOrDefault(x=>x.Type== ClaimTypes.NameIdentifier).Value;
+
+
+        //    var userAllergy = await dbContext.Users.Where(p=>p.Id == userIdClaim).Include(p=>p.Allergies).Select(p=>p.Allergies.Select(p=>p.Id))
+        //}
+
 
 
         //[Authorize]

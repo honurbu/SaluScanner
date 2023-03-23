@@ -11,6 +11,7 @@ namespace SaluScanner.Core.Entities
         public int Id { get; set; }
         public string AllergenName { get; set; }
         public string? AllergenDescription { get; set; }
+        public string? AllergenSymptomss { get; set; }
 
         public ICollection<User> Users { get; set; }
 

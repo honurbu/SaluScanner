@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SaluScanner.Repository.DbContexts;
 
@@ -11,9 +12,11 @@ using SaluScanner.Repository.DbContexts;
 namespace SaluScanner.Repository.Migrations
 {
     [DbContext(typeof(SqlServerDbContext))]
-    partial class SqlServerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230323220237_yeters")]
+    partial class yeters
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -215,9 +218,6 @@ namespace SaluScanner.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AllergenSymptomss")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Allergens");
@@ -304,6 +304,9 @@ namespace SaluScanner.Repository.Migrations
 
                     b.Property<int?>("AllergenId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ComponentDescription")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ComponentName")
                         .IsRequired()
