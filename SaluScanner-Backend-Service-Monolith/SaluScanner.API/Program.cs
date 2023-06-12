@@ -74,6 +74,18 @@ builder.Services.AddCustomTokenAuth(tokenOptions);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddCors( opt=>
+{
+    opt.AddPolicy("SaluCors",opt =>
+    {
+        opt.AllowAnyHeader()
+        .AllowAnyMethod()
+        .SetIsOriginAllowed((host) => true)
+        .AllowCredentials();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -88,6 +100,8 @@ app.UseSwaggerUI(c =>
 });
 
 app.UseHttpsRedirection();
+
+app.UseCors("SaluCors");
 
 app.UseAuthorization();
 

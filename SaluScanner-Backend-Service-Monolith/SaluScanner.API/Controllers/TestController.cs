@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ using static System.Reflection.Metadata.BlobBuilder;
 
 namespace SaluScanner.API.Controllers
 {
+    [EnableCors]
     [Route("[controller]")]
     [ApiController]
     public class TestController : CustomBaseController

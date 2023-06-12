@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SaluScanner.SharedLibrary.DTOs;
 
 namespace SaluScanner.API.Controllers
 {
+    [EnableCors]
     [ApiController]
 
     public class CustomBaseController : ControllerBase

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SaluScanner.Core.DTOs;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 
 namespace SaluScanner.API.Controllers
 {
+    [EnableCors]
     [Route("[controller]")]
     [ApiController]
     public class ProductController : CustomBaseController

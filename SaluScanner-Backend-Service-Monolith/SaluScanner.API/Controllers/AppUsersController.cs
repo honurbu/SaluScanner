@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,11 +8,14 @@ using SaluScanner.AuthServer.Core.Service;
 using SaluScanner.Core.Entities;
 using SaluScanner.Core.Services;
 using SaluScanner.Repository.DbContexts;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using static Azure.Core.HttpHeader;
 
 namespace SaluScanner.API.Controllers
 {
+    [EnableCors]
     [Route("[controller]/[action]")]
     [ApiController]
     public class AppUsersController : CustomBaseController
@@ -45,87 +49,72 @@ namespace SaluScanner.API.Controllers
 
 
 
+
         [Authorize]
         [HttpGet("{barcode}")]
-        public async Task<IActionResult> GetByProductWithAllergens(String barcode)
+        public async Task<IActionResult> GetByProductWithAllergens(string barcode)
         {
-            var products = await dbContext.Products.Where(x => x.Barcode == barcode).Select(x => x.Contents.Select(x => x.AllergenId)).FirstOrDefaultAsync();
-
-            var userName = HttpContext.User.Identity.Name;
-            var userIdClaim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-
-            var allergy = await dbContext.Users.Where(p => p.Id == userIdClaim.Value).Include(p => p.Allergies).Select(p => p.Allergies.Select(p => p.Id)).FirstOrDefaultAsync();
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var productControl = await dbContext.Products.Where(p => p.Barcode == barcode).FirstOrDefaultAsync();
 
 
-            //bool controls = products.Any(x => allergy.Contains((IEnumerable<int>)x)); // true
-
-
-            //if (controls == true)
-            //{
-            //    return Ok("Alerji var");
-            //}
-            //else
-            //{
-            //    return Ok("Alerji yok");
-            //}
-
-            if(products.FirstOrDefault() == allergy.FirstOrDefault())
+            if (productControl == null)
             {
-                return Ok("alerji var");
-            }
-            else
-            {
-                return Ok("alerji yok");
+                return BadRequest("Barcode Not Found !");
             }
 
+             var productContents = dbContext.Products
+                  .Where(p => p.Barcode == barcode)
+                  .Include(p => p.Contents)
+                  .ThenInclude(p => p.Allergen)
+                  .FirstOrDefault().Contents.ToList();
 
+            var user = await dbContext.Users
+                .Where(u => u.Id == userIdClaim)
+                .Include(u => u.Allergies)
+                .FirstOrDefaultAsync();
+
+
+            foreach (var allergen in user.Allergies)
+            {
+                foreach (var content in productContents)
+                {
+                    if (allergen.Id == content.AllergenId)
+                    {
+                        return Ok("Alerjin var tüketme ölersin");
+                    }
+                }
+            }
+            return Ok("Yok rahatlıkla ye sen daha yaşarsın bizi de gömersin");
         }
 
 
 
-        //[Authorize]
-        //[HttpPost]
-        //public async Task<IActionResult> AddAllergen(int id)
-        //{
-        //    var userName = HttpContext.User.Identity.Name;
-        //    var userIdClaim = User.Claims.FirstOrDefault(x=>x.Type== ClaimTypes.NameIdentifier).Value;
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> AddAllergen(int id)
+        {
+            var allergy = await dbContext.Allergens.FirstOrDefaultAsync(x => x.Id == id);
+            var userIdClaim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+
+            var user = await dbContext.Users.FirstOrDefaultAsync(x => x.Id == userIdClaim);
+
+            if (user == null)
+            {
+                return BadRequest("User not found !");
+            }
+
+            if (allergy == null)
+            {
+                return BadRequest("Allergy id not Founds");
+            }
 
 
-        //    var userAllergy = await dbContext.Users.Where(p=>p.Id == userIdClaim).Include(p=>p.Allergies).Select(p=>p.Allergies.Select(p=>p.Id))
-        //}
+            user.Allergies.Add(allergy);
+            await dbContext.SaveChangesAsync();
+            return Ok("Allergens Added !");
 
-
-
-        //[Authorize]
-        //[HttpPost]
-        //public async Task<IActionResult> AddAllergen(int id)
-        //{
-
-        //    var userName = HttpContext.User.Identity.Name;
-        //    var userIdClaim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-
-
-        //    //var userallergy = await dbContext.Users.Where(p => p.Id == userIdClaim.Value).Include(p => p.Allergies).Select(p => p.Allergies.Select(p => p.Id)).FirstOrDefaultAsync();
-
-        //    var allergy = dbContext.Allergens.Select(a => a.Id);
-
-        //    foreach (var item in allergy)
-        //    {
-        //        if(id == item)
-        //        {
-        //            var s = dbContext.Users.Include(u => u.Allergies).ThenInclude(d=>d.Id);
-        //        }
-        //        else
-        //        {
-
-        //        }
-        //    }
-
-
-
-        //    return Ok();
-
-        //}
+        }
 
     }
 }

@@ -13,7 +13,6 @@ namespace SaluScanner.Repository.Repositories
         }
 
 
-
         public async Task<Product> GetProductByBarcodeAsync(string barcode)
         {
             var filteredProduct = dbContext.Products.Where(p => p.Barcode == barcode)
